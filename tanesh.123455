@@ -1,0 +1,31 @@
+
+def solution(A):
+    N = len(A)
+    startPoints = [0] * N
+    endPoints = [0] * N
+
+    for i in range(N):
+        startPoints[i] = i - A[i]
+        endPoints[i] = i + A[i]
+
+    startPoints.sort()
+    endPoints.sort()
+
+    intersections = 0
+    startIdx = 0
+    endIdx = 0
+
+    while startIdx < N:
+        if startPoints[startIdx] <= endPoints[endIdx]:
+            intersections += startIdx -endIdx
+            startIdx += 1
+
+            if intersections > 10_000_000:
+                return -1
+        else:
+            endIdx += 1
+
+        if endIdx == N:
+            break
+
+    return intersections
